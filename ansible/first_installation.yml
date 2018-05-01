@@ -1,0 +1,9 @@
+---
+
+- hosts: workers
+  vars:
+    jdk_installation_path: /usr/local/jdk1.8.0_172/bin
+    spark_url: https://www.apache.org/dyn/closer.lua/spark/spark-2.3.0/spark-2.3.0-bin-hadoop2.7.tgz
+  roles:
+    - {role: 'jdk', tags: 'jdk', become: yes}
+    - { role: 'spark', spark_version: '2.3.0'}

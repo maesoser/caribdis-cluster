@@ -1,0 +1,4 @@
+---
+# Spark version to install
+spark_version: 2.3.0
+spark_url: http://ftp.cixug.es/apache/spark/spark-2.3.0/spark-2.3.0-bin-hadoop2.7.tgz

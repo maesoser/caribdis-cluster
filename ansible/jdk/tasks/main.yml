@@ -1,0 +1,17 @@
+- name: Check if we have to download the SDK
+  stat:
+      path: /tmp/jdk.tar.gz
+  register: stat_result
+- name: Download JDK
+  get_url:
+    url: "{{java_download_url}}"
+    dest: /tmp/jdk.tar.gz
+    headers: "Cookie: gpw_e24=http%3A%2F%2Fwww.oracle.com%2F; oraclelicense=accept-securebackup-cookie"
+  when: stat_result.stat.exists == False
+- name: Extract JDK
+  unarchive:
+    copy=no src="/tmp/jdk.tar.gz" dest="/usr/local/"
+- name: Add another bin dir to system-wide $PATH.
+  copy:
+    dest: /etc/profile.d/jdk.sh
+    content: 'PATH=$PATH:{{ jdk_installation_path }}'
